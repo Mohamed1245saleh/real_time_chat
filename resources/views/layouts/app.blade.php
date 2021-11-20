@@ -1,11 +1,11 @@
+<script href="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="css/style.css" rel="stylesheet" id="bootstrap-css">
-<link href="css/chat.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container-fluid">
+<div class="container-fluid" id='app'>
 <div class="row">
  <div class="col-lg-12 mail-box">
                   <aside class="sm-side">
@@ -22,9 +22,10 @@
                               <span><a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}<i class="fa fa-sign-out"></i>
-                                    </a>
+                                        {{ __('Logout') }}
 
+                                    </a>
+                                    <i class="fas fa-sign-out-alt"></i>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form></span>
@@ -90,58 +91,21 @@
                       </div>
                       <ul class="inbox-nav inbox-divider">
                           <li class="active">
-                              <a href="#"><i class="fa fa-inbox"></i> Inbox <span class="label label-danger pull-right">2</span></a>
+                              <a href="#"><i class="fa fa-plus"></i> Add Room <span class="label label-danger pull-right">2</span></a>
+</li>
+                          <li class="active">
+                              <a href="#"><i class="fa fa-user"></i> My Rooms <span class="label label-danger pull-right">2</span></a>
+</li>
+                          <li class="active">
+                              <a href="#"><i class="fa fa-users"></i> All Rooms <span class="label label-danger pull-right">2</span></a>
+</li>
+     
 
-                          </li>
-                          <li>
-                              <a href="#"><i class="fa fa-envelope-o"></i> Sent Mail</a>
-                          </li>
-                          <li>
-                              <a href="#"><i class="fa fa-bookmark-o"></i> Important</a>
-                          </li>
-                          <li>
-                              <a href="#"><i class=" fa fa-external-link"></i> Drafts <span class="label label-info pull-right">30</span></a>
-                          </li>
-                          <li>
-                              <a href="#"><i class=" fa fa-trash-o"></i> Trash</a>
-                          </li>
                       </ul>
-                      <ul class="nav nav-pills nav-stacked labels-info inbox-divider">
-                          <li> <h4>Labels</h4> </li>
-                          <li> <a href="#"> <i class=" fa fa-sign-blank text-danger"></i> Work </a> </li>
-                          <li> <a href="#"> <i class=" fa fa-sign-blank text-success"></i> Design </a> </li>
-                          <li> <a href="#"> <i class=" fa fa-sign-blank text-info "></i> Family </a>
-                          </li><li> <a href="#"> <i class=" fa fa-sign-blank text-warning "></i> Friends </a>
-                          </li><li> <a href="#"> <i class=" fa fa-sign-blank text-primary "></i> Office </a>
-                          </li>
-                      </ul>
-                      <ul class="nav nav-pills nav-stacked labels-info ">
-                          <li> <h4>Buddy online</h4> </li>
-                          <li> <a href="#"> <i class=" fa fa-circle text-success"></i>Alireza Zare <p>I do not think</p></a>  </li>
-                          <li> <a href="#"> <i class=" fa fa-circle text-danger"></i>Dark Coders<p>Busy with coding</p></a> </li>
-                          <li> <a href="#"> <i class=" fa fa-circle text-muted "></i>Mentaalist <p>I out of control</p></a>
-                          </li><li> <a href="#"> <i class=" fa fa-circle text-muted "></i>H3s4m<p>I am not here</p></a>
-                          </li><li> <a href="#"> <i class=" fa fa-circle text-muted "></i>Dead man<p>I do not think</p></a>
-                          </li>
-                      </ul>
+                     
+                      
 
-                      <div class="inbox-body text-center">
-                          <div class="btn-group">
-                              <a class="btn mini btn-primary" href="javascript:;">
-                                  <i class="fa fa-plus"></i>
-                              </a>
-                          </div>
-                          <div class="btn-group">
-                              <a class="btn mini btn-success" href="javascript:;">
-                                  <i class="fa fa-phone"></i>
-                              </a>
-                          </div>
-                          <div class="btn-group">
-                              <a class="btn mini btn-info" href="javascript:;">
-                                  <i class="fa fa-cog"></i>
-                              </a>
-                          </div>
-                      </div>
+                      
 
                   </aside>
                   <aside class="lg-side">
@@ -211,11 +175,13 @@
                                  </li>
                              </ul>
                          </div> -->
+                         <!-- @{{message}} -->
                          @yield('content')
                       </div>
                   </aside>
               </div>
 </div>
 </div>
+<script src="{{asset('js/index.js')}}"></script>
 
 

@@ -14,3 +14,10 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');
+
+mix.css('resources/css/chat.css', 'public/css/style.css');
+mix.css('resources/css/style.css', 'public/css/style.css');
+// mix.css('resources/css/fontawesome.css', 'public/css/style.css');
+// mix.css('resources/css/bootstrap.css', 'public/css/style.css');
+mix.js('resources/js/index.js', 'public/js/index.js').vue();
+// mix.js('resources/js/index.js', 'public/js/index.js');
