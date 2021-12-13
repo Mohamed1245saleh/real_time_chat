@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\messages as Messages;
+use App\Models\Rooms as Rooms;
+use App\Models\onlineUser as onlineUser;
 
 class User extends Authenticatable
 {
@@ -43,7 +45,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function messages(){
-        return $this->hasMany('Messages' , 'user_id');
+    public function messages()
+    {
+        return $this->hasMany(Messages::class, 'user_id');
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Rooms::class, 'id');
+    }
+
+    public function onlineUsers()
+    {
+        return $this->hasOne(onlineUser::class, 'user_id');
     }
 }

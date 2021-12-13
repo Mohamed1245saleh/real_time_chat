@@ -4,19 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Rooms;
+use App\Models\User as User;
+use App\Models\Rooms as Rooms;
 
-class Messages extends Model
+class onlineUser extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
-    protected $fillable = ['body' , 'user_id' , 'room_id'];
-
+    protected $fillable =["user_id" , "room_id" , "userLogin" , "userLogout"];
+    
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
 
     public function rooms()
     {
