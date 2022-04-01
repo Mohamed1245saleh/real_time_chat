@@ -18,16 +18,21 @@ class onlineUsersPerRoom implements ShouldBroadcast
 
     public $roomId;
     public $message;
+    public $users;
+    public $activityMessage;
+
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($room_id, $message)
+    public function __construct($room_id, $message, $users, $activityMessage="")
     {
-        $this->roomId =  $room_id;
-        $this->message = $message;
+        $this->roomId            = $room_id;
+        $this->message           = $message;
+        $this->users             = $users;
+        $this->activityMessage   = $activityMessage;
     }
 
     /**

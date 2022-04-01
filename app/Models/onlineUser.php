@@ -24,4 +24,9 @@ class onlineUser extends Model
     {
         return $this->belongsTo(Rooms::class, 'room_id');
     }
+
+    public function onlineUsers()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

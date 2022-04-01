@@ -239,10 +239,10 @@ body {
     vertical-align: top;
 }
 
-.mail-box .sm-side {
+.sm-side {
     background: none repeat scroll 0 0 #e5e8ef;
     border-radius: 4px 0 0 4px;
-    width: 25%;
+    width: 30%;
 }
 
 .mail-box .lg-side {
@@ -256,7 +256,9 @@ body {
     border-radius: 4px 0 0;
     color: #fff;
     min-height: 80px;
-    padding: 10px;
+    padding: 20px;
+    margin-right: 3px;
+    height: 130px;
 }
 
 .user-head .inbox-avatar {
@@ -264,8 +266,9 @@ body {
     width: 65px;
 }
 
-.user-head .inbox-avatar img {
-    border-radius: 4px;
+.inbox-avatar img {
+    border-radius: 50%;
+    vertical-align: unset;
 }
 
 .user-head .user-name {
@@ -274,8 +277,8 @@ body {
 }
 
 .user-head .user-name h5 {
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 700;
     margin-bottom: 0;
     margin-top: 15px;
 }
@@ -285,20 +288,22 @@ body {
 }
 
 .user-head .user-name span a {
-    color: #87e2e7;
-    font-size: 12px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 a.mail-dropdown {
-    background: none repeat scroll 0 0 #80d3d9;
+    background: none repeat scroll 0 0 #000000;
     border-radius: 2px;
-    color: #01a7b3;
+    color: #fff;
     font-size: 10px;
     margin-top: 20px;
     padding: 3px 5px;
 }
 
 .inbox-body {
+    min-height: 550px;
     padding: 20px;
 }
 
@@ -393,11 +398,12 @@ ul.labels-info li a i {
 }
 
 .inbox-head {
-    background: none repeat scroll 0 0 #41cac0;
+    background: none repeat scroll 0 0 #c2c2c2;
     border-radius: 0 4px 0 0;
     color: #fff;
     min-height: 80px;
     padding: 20px;
+    height: 130px;
 }
 
 .inbox-head h3 {
@@ -669,4 +675,17 @@ ul {
     list-style-type: none;
     padding: 0px;
     margin: 0px;
+}
+
+.user-Background-color {
+    background-color: #000000;
+    border: 1px solid #000000;
+    color: #fff;
+    border-radius: 5px;
+    height: 129;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    top: -20px;
+    left: -5px;
 }

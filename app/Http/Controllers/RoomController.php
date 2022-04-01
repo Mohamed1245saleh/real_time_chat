@@ -59,21 +59,11 @@ class RoomController extends Controller
 
     public function whoIsOnline($room_id)
     {
+        \DB::connection()->enableQueryLog();
         $user = Auth::user()->id;
-        $ifUserIsOnline = onlineUser::where("user_id", $user)->count();
+        $userName = Auth::user()->name;
+        $ifUserIsOnline = onlineUser::where("user_id", $user)->where("room_id", $room_id)->count();
         if ($ifUserIsOnline == 0) {
-            $onlineUser = onlineUser::create([
-                "user_id"     => $user,
-                "room_id"     => $room_id,
-                "userLogin"   => date("Y-m-d H:i:s")
-             ]);
-        } else {
-            //leave the current room or going to another Room
-            $onlienuser = onlineUser::where("user_id", $user)->get()[0];
-            onlineUser::where("user_id", $user)->delete();
-            $rooms = Room::where("id", $onlienuser->room_id)->withCount('onlineUsers')->get()[0]->online_users_count;
-            // dd("Ahmed".$rooms);
-            event(new offlineUsersPerRoom($onlienuser->room_id, $rooms));
             $onlineUser = onlineUser::create([
                 "user_id"     => $user,
                 "room_id"     => $room_id,
@@ -81,7 +71,20 @@ class RoomController extends Controller
              ]);
         }
         $rooms = Room::where("id", $room_id)->withCount('onlineUsers')->get()[0]->online_users_count;
-        event(new onlineUsersPerRoom($room_id, $rooms));
+        $onlineUsersDataPerRoom = onlineUser::with('onlineUsers')->where("room_id", $room_id)->get()->pluck('onlineUsers');
+        event(new onlineUsersPerRoom($room_id, $rooms, $onlineUsersDataPerRoom, $userName." has joined the room"));
         return $rooms;
+    }
+
+    public function leavingCurrentRoom($room_id)
+    {
+        $userId = Auth::user()->id;
+        $userName = Auth::user()->name;
+        $onlienuser = onlineUser::where("user_id", $userId)->get()[0];
+        $deletedUser = onlineUser::where("user_id", $userId)->where("room_id", $room_id)->delete();
+        $rooms = Room::where("id", $onlienuser->room_id)->withCount('onlineUsers')->get()[0]->online_users_count;
+        event(new offlineUsersPerRoom($onlienuser->room_id, $rooms, $userName." has left the room"));
+        $onlineUsersDataPerRoom = onlineUser::with('onlineUsers')->where("room_id", $room_id)->get()->pluck('onlineUsers');
+        return $deletedUser;
     }
 }

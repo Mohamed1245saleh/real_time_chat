@@ -45,7 +45,8 @@ export default {
   },
   mounted() {
     this.getAllRooms();
-    console.log("Function has been Created");
+    // console.log("Function has been Created");
+    
   },
   methods: {
     getAllRooms: function () {

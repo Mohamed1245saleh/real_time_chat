@@ -1,8 +1,12 @@
 import Vue from 'vue'
+import Vuex from "vuex"
 import VueRouter from 'vue-router'
 import VueResource from "vue-resource"
+import store from "./store"
 import Pusher from "pusher-js"
-Vue.use(VueRouter)
+
+Vue.use(VueRouter);
+Vue.use(Vuex);
 Vue.use(VueResource);
 Vue.use(require('vue-moment'));
 Vue.use(require('vue-pusher'), {
@@ -12,18 +16,29 @@ Vue.use(require('vue-pusher'), {
     //     encrypted: true,
     // }
 });
+
+
 import myRooms from './components/rooms/myRooms.vue'
 import addRoom from './components/rooms/addRoom.vue'
 import allRooms from './components/rooms/allRooms.vue'
 import chatBox from './components/chatBox/chatBox.vue'
+import profile from './components/profile/profile.vue'
+import privatechatbox from './components/chatBox/privateChatBox.vue'
+
 
 Vue.http.headers.common['X-CSRF-Token'] = document.getElementById("_token").getAttribute("value");
+Vue.prototype.$authenticatedUser = JSON.parse(document.querySelector("meta[name='authenticatedUser']").getAttribute('content'));
 
 const routes = [
+    { path: '/', redirect: '/allrooms' },
+    { path: '/profile', component: profile },
     { path: '/chatbox/:room_id/:room_name', name: 'chatBox', component: chatBox },
     { path: '/allrooms', component: allRooms },
     { path: '/addroom', component: addRoom },
-    { path: '/myrooms', component: myRooms }
+    { path: '/myrooms', component: myRooms },
+    { path: '/privatechatbox/:sender_id/:receiver_id', name: 'privatechatbox', component: privatechatbox },
+
+
 ]
 
 // 3. Create the router instance and pass the `routes` option
@@ -37,5 +52,6 @@ const router = new VueRouter({
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
 const app = new Vue({
-    router
+    router, 
+    store
 }).$mount('#app')

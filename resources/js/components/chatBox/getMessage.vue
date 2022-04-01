@@ -8,8 +8,10 @@
         placeholder="Type your message here..."
       />
     </div>
+    <!-- <emoji></emoji> -->
     <div class="send_message">
-      <div class="icon"></div>
+      <!-- <div class="icon"></div> -->
+      
       <div class="text" @click="sendNewMessage()">Send</div>
     </div>
   </div>
@@ -19,16 +21,20 @@
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import MessageBox from "vue-msgbox/src";
+// import emoji from './emoji.vue';
 require("vue-msgbox/lib/vue-msgbox.css");
 export default {
   data: function () {
     return {
       body: "",
     };
+  },components:{
+    //  emoji: emoji
   },
   methods: {
     sendNewMessage: function () {
-      this.$http
+      if(this.$route.params.room_id != undefined){
+this.$http
         .post("/AddNewMessage", {
           body: this.body,
           room_id: this.$route.params.room_id,
@@ -37,6 +43,20 @@ export default {
           this.$emit("get-the-message", response.body.payload);
           this.body = "";
         });
+      }else if(this.$route.params.sender_id && this.$route.params.receiver_id){
+this.$http
+        .post("/AddNewPrivateMessage", {
+          body: this.body,
+          sender_id: this.$route.params.sender_id,
+          receiver_id: this.$route.params.receiver_id,
+        })
+        .then((response) => {
+          console.log(response.body[0].name);
+          // this.$emit("get-the-message", response.body.payload);
+          this.body = "";
+        });
+      }
+      
     },
   },
 };

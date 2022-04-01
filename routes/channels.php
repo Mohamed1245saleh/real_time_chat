@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
-
+use App\Models\PrivateChatRoom;
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -19,3 +19,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 // Broadcast::channel('room', function ($user) {
 //     return Auth::check();
 // });
+
+Broadcast::channel('privateChatRoom{senderId}-{receiverId}', function ($user,$senderId ,$receiverId) {
+    return  PrivateChatRoom::where("sender_id" , $user->id)->where("receiver_id" , $receiverId)->count();
+});

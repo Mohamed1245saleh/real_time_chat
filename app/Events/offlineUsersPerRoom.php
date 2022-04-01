@@ -18,16 +18,18 @@ class offlineUsersPerRoom implements ShouldBroadcast
 
     public $roomId;
     public $message;
+    public $activityMessage;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($room_id, $message)
+    public function __construct($room_id, $message, $activityMessage="")
     {
-        $this->roomId =  $room_id;
-        $this->message = $message;
+        $this->roomId           =  $room_id;
+        $this->message          = $message;
+        $this->activityMessage = $activityMessage;
     }
 
     /**
