@@ -11,7 +11,7 @@
     <!-- <emoji></emoji> -->
     <div class="send_message">
       <!-- <div class="icon"></div> -->
-      
+
       <div class="text" @click="sendNewMessage()">Send</div>
     </div>
   </div>
@@ -20,6 +20,7 @@
 <script>
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import * as PusherPushNotifications from "@pusher/push-notifications-web";
 import MessageBox from "vue-msgbox/src";
 // import emoji from './emoji.vue';
 require("vue-msgbox/lib/vue-msgbox.css");
@@ -56,8 +57,12 @@ this.$http
           this.body = "";
         });
       }
-      
-    },
-  },
+
+    },getNotification:function(){
+
+      }
+  },mounted(){
+      this.getNotification();
+    }
 };
 </script>

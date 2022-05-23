@@ -20,6 +20,7 @@ class PrivateChatRoom extends Migration
           $table->foreign('sender_id')->references('id')->on('users');
           $table->unsignedBigInteger("receiver_id")->unsigned();
           $table->foreign('receiver_id')->references('id')->on('users');
+//
           $table->timestamps();
         });
     }

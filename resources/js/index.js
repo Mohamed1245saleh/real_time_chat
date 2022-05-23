@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from "vuex"
 import VueRouter from 'vue-router'
 import VueResource from "vue-resource"
+import * as PusherPushNotifications from "@pusher/push-notifications-web";
 import store from "./store"
 import Pusher from "pusher-js"
 
@@ -52,6 +53,6 @@ const router = new VueRouter({
 // Make sure to inject the router with the router option to make the
 // whole app router-aware.
 const app = new Vue({
-    router, 
+    router,
     store
 }).$mount('#app')

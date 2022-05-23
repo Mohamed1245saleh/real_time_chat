@@ -5,7 +5,7 @@
         <!-- <div class="inbox-body"> -->
 
         <who_is_online :onlineUsers="whoisOnline" :authenticatedUser="this.$authenticatedUser.id"></who_is_online>
-        
+
         <Keep-alive>
         <component :recievedActivityMessage = "recievedActivityMessage" :is="activity" ></component>
         </Keep-alive>
@@ -70,7 +70,7 @@ export default {
     get_message: getMessage,
     activity: Activity,
     who_is_online: who_is_online,
-    
+
   },
   computed:{
       reveiver_data(){
@@ -102,9 +102,9 @@ export default {
     },
     createNewPrivateChat: function(){
        var instance = this;
-       this.$http.post('/createNewPrivateChat', 
+       this.$http.post('/createNewPrivateChat',
       {
-        sender_id: this.$route.params.sender_id   , 
+        sender_id: this.$route.params.sender_id   ,
         receiver_id:this.$route.params.receiver_id
        }).then(response => {
        this.$store.state.privateChatReceiverUser = response.body;
@@ -112,14 +112,15 @@ export default {
   }, response => {
     // error callback
   });
-     }
+     },
+
   },
   mounted() {
     this.createNewPrivateChat();
     this.bindEvents("onlineUsersPerRoom" , this.room_id + "onlineUser" , this.updateOnlineCounts);
     this.bindEvents("newMessage" , this.room_id + "room" , this.getTheSentMessageBack);
-    
-    
+
+
   }
 };
 </script>

@@ -17,13 +17,13 @@
         <!-- <div class="inbox-body"> -->
 
         <who_is_online :onlineUsers="whoisOnline" :authenticatedUser="this.$authenticatedUser.id"></who_is_online>
-        
+
         <Keep-alive>
         <component :recievedActivityMessage = "recievedActivityMessage" :is="activity" ></component>
         </Keep-alive>
         <!-- </div> -->
       </aside>
-    </div> 
+    </div>
     </span>
 
         <!-- Tab 2 Contents -->
@@ -35,7 +35,7 @@
           </div>
       </span>
         </div>
-    
+
     <div class="col-md-10" id="chatBox">
       <div class="chat_window">
         <div class="top_menu">
@@ -67,7 +67,7 @@
 @keyframes NavBarAnimation {
   from {background-color: gray;}
   to {background-color: navy;}
- 
+
 }
 .receiverUser{
   width: 100px;
@@ -90,11 +90,11 @@ ul.tabs li{
   line-height: 35px;
   font-size: 20px;
   border-radius: 14px;
-   
+
 }
 ul.tabs li:hover{
 animation-name: NavBarAnimation;
-  animation-duration: 1s; 
+  animation-duration: 1s;
   animation-iteration-count: infinite;
 }
 ul.tabs a{
@@ -111,7 +111,7 @@ import $ from 'jquery';
 
 
 export default {
-  beforeRouteLeave(to, from, next) {  
+  beforeRouteLeave(to, from, next) {
     var instance = this;
       this.$http.get("/leavingCurrentRoom/" + instance.room_id).then((response) => {
       if(response.body > 0){
@@ -140,7 +140,7 @@ export default {
     get_message: getMessage,
     activity: Activity,
     who_is_online: who_is_online,
-    
+
   },
   computed:{
      receiverUserName(){
@@ -155,7 +155,7 @@ export default {
       },
       clearTextarea(){
         this.$refs.emoji.clear()
-      }, 
+      },
     getTheSentMessageBack: function (data) {
       var instance = this;
       var data;
@@ -170,11 +170,11 @@ export default {
     whoIsOnline: function () {
       var instance = this;
       this.$http.get("/whoisonline/" + instance.room_id).then((response) => {
-        
+
       });
     },
     bindEvents: function (event, channelName , callBackFucntion) {
-      // Pusher.logToConsole = true;
+      Pusher.logToConsole = true;
       var pusher = new Pusher("19ef4130d77bd9878839", {
         cluster: "mt1",
       });
@@ -206,7 +206,7 @@ export default {
 
   $('.tab').click(function(event) {
     event.preventDefault();
-     var target = $(this.rel); 
+     var target = $(this.rel);
         $('.tab_contents').not(target).hide();
         target.show();
   $('#tabs_container > .tabs > li.active')
@@ -221,17 +221,17 @@ export default {
  });
 
 
-    
+
   }
   },
   mounted() {
-    
+
     this.bindEvents("onlineUsersPerRoom" , this.room_id + "onlineUser" , this.updateOnlineCounts);
     this.bindEvents("newMessage" , this.room_id + "room" , this.getTheSentMessageBack);
     this.whoIsOnline();
     this.bindEvents("offlineUsersPerRoom", this.room_id + "offlineUser" , this.leavingUsers);
     this.naviagtingTabs();
-    
+
   }
 };
 </script>
